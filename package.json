@@ -2,7 +2,7 @@
 	"name": "vscode-expect-outline",
 	"displayName": "Expect Outline",
 	"description": "show outline for expect scripts",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "yuechuanx",
 	"engines": {
 		"vscode": "^1.45.0"
