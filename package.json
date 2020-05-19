@@ -3,17 +3,51 @@
 	"displayName": "Expect Outline",
 	"description": "show outline for expect scripts",
 	"version": "0.0.1",
+	"publisher": "yuechuanx",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
 	"categories": [
 		"Programming Languages"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yuechuanx/vscode-expect.git"
+	},
+	"homepage": "https://github.com/yuechuanx/vscode-expect/blob/master/README.md",
 	"activationEvents": [
 		"onLanguage:expect"
 	],
 	"main": "./out/extension.js",
-	"contributes": {},
+	"contributes": {
+		"languages": [
+			{
+				"id": "expect",
+				"aliases": [
+					"Expect",
+					"expect"
+				],
+				"extensions": [
+					".exp",
+					".expect"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "expect",
+				"scopeName": "source.exp",
+				"path": "./syntaxes/expect.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "expect",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
 		"compile": "tsc -p ./",
