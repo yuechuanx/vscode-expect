@@ -6,14 +6,12 @@ import * as vscode from 'vscode';
 export class ExpectDocumentSymbolProvider implements vscode.DocumentSymbolProvider {
 
     public provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.SymbolInformation[] {
-
-        const tokenToKind = this.tokenToKind;
-
         const text = document.getText();
-        const matchedList = this.matchAll(this.pattern, text);
+        const matchedFuncList = this.matchAll(this.functionPattern, text);
+        const matchedVarList = this.matchAll(this.variablePattern, text);
 
         const result: vscode.SymbolInformation[] = [];
-        matchedList.map((matched) => {
+        matchedFuncList.map((matched) => {
             // const type = 'proc';
             const name = matched[1];
             const kind = vscode.SymbolKind.Function;
@@ -27,24 +25,29 @@ export class ExpectDocumentSymbolProvider implements vscode.DocumentSymbolProvid
             ));
         });
 
+        matchedVarList.map((matched) => {
+            // const type = 'proc';
+            const name = matched[1];
+            const kind = vscode.SymbolKind.Variable;
+
+            const position = document.positionAt(matched.index || 0);
+            result.push(new vscode.SymbolInformation(
+                name,
+                kind,
+                '',
+                new vscode.Location(document.uri, position)
+            ));
+        });
+
         return result;
     }
 
-    private get tokenToKind(): { [name: string]: vscode.SymbolKind; } {
-        return {
-            // package: vscode.SymbolKind.Class,
-            // sub: vscode.SymbolKind.Function,
-            // subtest: vscode.SymbolKind.Function,
-            set: vscode.SymbolKind.Variable,
-            proc: vscode.SymbolKind.Function,
-        };
+    private get functionPattern() {
+        return /^proc\s(\w+)\s\{(([\s,\w])+|)\}\s\{/gm;
     }
 
-    // TODO: replace with better regexp
-    private get pattern() {
-        // return /(^proc|\bset)\b +([^ ;\n'"{]+|(['"].+['"])+)/gm;
-        // return new RegExp('^proc\s(\w+)\s\{([\s,\w])+\}');
-        return /^proc\s(\w+)\s\{(([\s,\w])+|)\}\s\{/gm;
+    private get variablePattern() {
+        return /^set\s+(\w+)\s+(.*)/gm;
     }
 
     private matchAll(pattern: RegExp, text: string): Array<RegExpMatchArray> {
