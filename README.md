@@ -1,5 +1,7 @@
 # Expect Outline
 
+![icon](https://github.com/yuechuanx/vscode-expect/blob/master/imgs/icon.png)
+
 An extension for VS Code which provides support showing the outline for Expect scripts.
 
 **Features:**
@@ -9,7 +11,7 @@ An extension for VS Code which provides support showing the outline for Expect s
 - syntax highlight
 - code snippet
 
-![demo](./imgs/demo.png)
+![demo](https://github.com/yuechuanx/vscode-expect/blob/master/imgs/demo.png)
 
 
 
