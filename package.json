@@ -1,5 +1,5 @@
 {
-	"name": "vscode-expect",
+	"name": "vscode-expect-outline",
 	"displayName": "Expect Outline",
 	"description": "Support outline for expect scripts",
 	"version": "0.0.2",
@@ -8,13 +8,16 @@
 		"vscode": "^1.45.0"
 	},
 	"categories": [
-		"Programming Languages"
+		"Programming Languages",
+		"Snippets"
 	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/yuechuanx/vscode-expect.git"
 	},
 	"homepage": "https://github.com/yuechuanx/vscode-expect/blob/master/README.md",
+	"icon": "imgs/icon.png",
+	"license": "MIT",
 	"activationEvents": [
 		"onLanguage:expect"
 	],
